@@ -15,9 +15,24 @@ def all_houses(filename):
       - set[str]: a set of strings
     """
 
-    houses = set()
+    # Initialize list to empty
+    house_list = []
 
-    # TODO: replace this with your code
+    # Open the file and assign to variable
+    cohort_data = open(filename)
+    for line in cohort_data:
+        # Tokenize each line
+        cohort_line = line.split("|")
+
+        # Find the "house" category and add to list
+        house = cohort_line[2] 
+        if house == '':
+            continue
+        else:
+            house_list.append(house)
+
+    # Convert to set
+    houses = set(house_list)
 
     return houses
 
