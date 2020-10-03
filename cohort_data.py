@@ -155,6 +155,8 @@ def all_names_by_house(filename):
     for roster in roster_list:
         roster.sort()
 
+    cohort_data.close()
+
     return roster_list
 
 
@@ -191,6 +193,8 @@ def all_data(filename):
         # Turn tokens into a tuple
         all_data.append(tuple(element for element in tokenized_list))
 
+    cohort_data.close()
+
     return all_data
 
 
@@ -215,7 +219,7 @@ def get_cohort_for(filename, name):
       - str: the person's cohort or None
     """
 
-    # TODO: replace this with your code
+    cohort_data = open(filename)
 
 
 def find_duped_last_names(filename):
