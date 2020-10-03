@@ -25,7 +25,7 @@ def all_houses(filename):
         cohort_line = line.split("|")
 
         # Find the "house" category and add to list
-        house = cohort_line[2] 
+        house = cohort_line[2]
         if house == '':
             continue
         else:
@@ -67,7 +67,25 @@ def students_by_cohort(filename, cohort='All'):
 
     students = []
 
-    # TODO: replace this with your code
+    # Open file and assign to varaible
+    cohort_data = open(filename)
+
+    # Loop through data
+    for line in cohort_data:
+
+        # Tokenize: [first, last, house, teacher, cohort]
+        tokenized_list = line.split("|")
+
+        full_name = tokenized_list[0] + ' ' + tokenized_list[1]
+
+        cohort_name = tokenized_list[-1].strip()
+
+        # Append names to students depending on cohort
+        if cohort != "All":
+            if cohort_name == cohort:
+                students.append(full_name)
+        elif cohort_name != "G" and cohort_name != "I":
+            students.append(full_name)
 
     return sorted(students)
 
@@ -205,11 +223,13 @@ def get_housemates_for(filename, name):
 if __name__ == '__main__':
     import doctest
 
-    result = doctest.testfile('doctests.py',
-                              report=False,
-                              optionflags=(
-                                  doctest.REPORT_ONLY_FIRST_FAILURE
-                              ))
+    result = doctest.testfile(
+        'doctests.py',
+        report=False,
+        optionflags=(
+            doctest.REPORT_ONLY_FIRST_FAILURE
+        )
+    )
     doctest.master.summarize(1)
     if result.failed == 0:
         print('ALL TESTS PASSED')
