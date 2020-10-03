@@ -177,9 +177,19 @@ def all_data(filename):
       - list[tuple]: a list of tuples
     """
 
+    cohort_data = open(filename)
+
     all_data = []
 
-    # TODO: replace this with your code
+    for line in cohort_data:
+        tokenized_list = line.strip().split('|')
+        full_name = tokenized_list[0] + ' ' + tokenized_list[1]
+
+        # Replace first two indexes with full name
+        tokenized_list[:2] = [full_name]
+
+        # Turn tokens into a tuple
+        all_data.append(tuple(element for element in tokenized_list))
 
     return all_data
 
