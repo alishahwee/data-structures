@@ -73,7 +73,7 @@ def students_by_cohort(filename, cohort='All'):
     # Loop through data
     for line in cohort_data:
 
-        # Tokenize: [first, last, house, teacher, cohort]
+        # Tokenize: [first, last, roster, teacher, cohort]
         tokenized_list = line.split("|")
 
         full_name = tokenized_list[0] + ' ' + tokenized_list[1]
