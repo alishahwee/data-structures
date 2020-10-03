@@ -254,7 +254,7 @@ def find_duped_last_names(filename):
         tokenized_list = line.strip().split('|')
         last_name = tokenized_list[1]
         last_name_list.append(last_name)
-        
+
     cohort_data.close()
 
     return {last_name for last_name in last_name_list if last_name_list.count(last_name) > 1}
@@ -272,12 +272,42 @@ def get_housemates_for(filename, name):
     {'Angelina Johnson', ..., 'Seamus Finnigan'}
     """
 
-    # TODO: replace this with your code
+    housemates = []
+    house = None
+    cohort = None
+    current_house = None
+    current_cohort = None
 
+    with open(filename) as cohort_data:
+        for line in cohort_data:
+            tokenized_list = line.strip().split('|')
+            full_name = tokenized_list[0] + ' ' + tokenized_list[1]
+
+            # Break once target is found
+            if full_name == name:
+                house = tokenized_list[2]
+                cohort = tokenized_list[-1]
+                break
+
+    with open(filename) as cohort_data:
+        for line in cohort_data:
+            tokenized_list = line.strip().split('|')
+            full_name = tokenized_list[0] + ' ' + tokenized_list[1]
+
+            # Keep track of houses and cohorts to compare once we know the target
+            if full_name != name:
+                current_house = tokenized_list[2]
+                current_cohort = tokenized_list[-1]
+
+            if house == current_house and cohort == current_cohort:
+                housemates.append(full_name)
+
+    return set(housemates)
 
 ##############################################################################
 # END OF MAIN EXERCISE.  Yay!  You did it! You Rock!
 #
+
 
 if __name__ == '__main__':
     import doctest
