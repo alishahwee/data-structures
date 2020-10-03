@@ -229,6 +229,8 @@ def get_cohort_for(filename, name):
         if full_name == name:
             return tokenized_list[-1]
 
+    cohort_data.close()
+
 
 def find_duped_last_names(filename):
     """Return a set of duplicated last names that exist in the data.
@@ -244,7 +246,7 @@ def find_duped_last_names(filename):
       - set[str]: a set of strings
     """
 
-    # TODO: replace this with your code
+
 
 
 def get_housemates_for(filename, name):
