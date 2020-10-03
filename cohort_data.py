@@ -34,6 +34,8 @@ def all_houses(filename):
     # Convert to set
     houses = set(house_list)
 
+    cohort_data.close()
+
     return houses
 
 
@@ -87,6 +89,8 @@ def students_by_cohort(filename, cohort='All'):
         elif cohort_name != "G" and cohort_name != "I":
             students.append(full_name)
 
+    cohort_data.close()
+
     return sorted(students)
 
 
@@ -121,17 +125,36 @@ def all_names_by_house(filename):
       - list[list]: a list of lists
     """
 
-    dumbledores_army = []
-    gryffindor = []
-    hufflepuff = []
-    ravenclaw = []
-    slytherin = []
-    ghosts = []
-    instructors = []
+    cohort_data = open(filename)
 
-    # TODO: replace this with your code
+    tokenized_list = []
 
-    return []
+    # Tokenize each line and append to list
+    for line in cohort_data:
+        tokenized_list.append(line.strip().split('|'))
+
+    # Filter the tokenized list and add them to their respective rosters
+    dumbledores_army = [element[0] +  ' ' + element[1]
+                        for element in tokenized_list if element[2] == "Dumbledore's Army"]
+    gryffindor = [element[0] + ' ' + element[1]
+                        for element in tokenized_list if element[2] == "Gryffindor"]
+    hufflepuff = [element[0] + ' ' + element[1]
+                        for element in tokenized_list if element[2] == "Hufflepuff"]
+    ravenclaw = [element[0] + ' ' + element[1]
+                        for element in tokenized_list if element[2] == "Ravenclaw"]
+    slytherin = [element[0] + ' ' + element[1]
+                        for element in tokenized_list if element[2] == "Slytherin"]
+    ghosts = [element[0] + ' ' + element[1]
+                        for element in tokenized_list if element[-1] == "G"]
+    instructors = [element[0] + ' ' + element[1]
+                        for element in tokenized_list if element[-1] == "I"]
+
+    roster_list = [dumbledores_army, gryffindor, hufflepuff, ravenclaw, slytherin, ghosts, instructors]
+
+    for roster in roster_list:
+        roster.sort()
+
+    return roster_list
 
 
 def all_data(filename):
