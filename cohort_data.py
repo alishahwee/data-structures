@@ -221,6 +221,14 @@ def get_cohort_for(filename, name):
 
     cohort_data = open(filename)
 
+    for line in cohort_data:
+        tokenized_list = line.strip().split('|')
+        full_name = tokenized_list[0] + ' ' + tokenized_list[1]
+
+        # Return cohort if name matches arg
+        if full_name == name:
+            return tokenized_list[-1]
+
 
 def find_duped_last_names(filename):
     """Return a set of duplicated last names that exist in the data.
