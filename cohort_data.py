@@ -134,22 +134,23 @@ def all_names_by_house(filename):
         tokenized_list.append(line.strip().split('|'))
 
     # Filter the tokenized list and add them to their respective rosters
-    dumbledores_army = [element[0] +  ' ' + element[1]
+    dumbledores_army = [element[0] + ' ' + element[1]
                         for element in tokenized_list if element[2] == "Dumbledore's Army"]
     gryffindor = [element[0] + ' ' + element[1]
-                        for element in tokenized_list if element[2] == "Gryffindor"]
+                  for element in tokenized_list if element[2] == "Gryffindor"]
     hufflepuff = [element[0] + ' ' + element[1]
-                        for element in tokenized_list if element[2] == "Hufflepuff"]
+                  for element in tokenized_list if element[2] == "Hufflepuff"]
     ravenclaw = [element[0] + ' ' + element[1]
-                        for element in tokenized_list if element[2] == "Ravenclaw"]
+                 for element in tokenized_list if element[2] == "Ravenclaw"]
     slytherin = [element[0] + ' ' + element[1]
-                        for element in tokenized_list if element[2] == "Slytherin"]
+                 for element in tokenized_list if element[2] == "Slytherin"]
     ghosts = [element[0] + ' ' + element[1]
-                        for element in tokenized_list if element[-1] == "G"]
+              for element in tokenized_list if element[-1] == "G"]
     instructors = [element[0] + ' ' + element[1]
-                        for element in tokenized_list if element[-1] == "I"]
+                   for element in tokenized_list if element[-1] == "I"]
 
-    roster_list = [dumbledores_army, gryffindor, hufflepuff, ravenclaw, slytherin, ghosts, instructors]
+    roster_list = [dumbledores_army, gryffindor, hufflepuff,
+                   ravenclaw, slytherin, ghosts, instructors]
 
     for roster in roster_list:
         roster.sort()
