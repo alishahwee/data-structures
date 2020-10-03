@@ -246,7 +246,18 @@ def find_duped_last_names(filename):
       - set[str]: a set of strings
     """
 
+    cohort_data = open(filename)
 
+    last_name_list = []
+
+    for line in cohort_data:
+        tokenized_list = line.strip().split('|')
+        last_name = tokenized_list[1]
+        last_name_list.append(last_name)
+        
+    cohort_data.close()
+
+    return {last_name for last_name in last_name_list if last_name_list.count(last_name) > 1}
 
 
 def get_housemates_for(filename, name):
